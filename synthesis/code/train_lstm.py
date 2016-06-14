@@ -31,12 +31,12 @@ y_test=y_test['Output_feature'];
 
 print(len(X_train), 'train sequences')
 print(len(X_test), 'test sequences')
-
+print('1.check :X[4][152] ',X_train[5][153])
 print("Pad sequences (samples x time)")
 ## X_train = sequence.pad_sequences(X_train, maxlen=maxlen)
 ## X_test = sequence.pad_sequences(X_test, maxlen=maxlen)
-X_train = sequence.pad_sequences(X_train,maxlen=156)
-X_test = sequence.pad_sequences(X_test,maxlen=156)
+##X_train = sequence.pad_sequences(X_train,maxlen=156)
+##X_test = sequence.pad_sequences(X_test,maxlen=156)
 #y_train = sequence.pad_sequences(y_train,maxlen=44)
 #y_test = sequence.pad_sequences(y_test,maxlen=44)
 
@@ -44,13 +44,13 @@ print('X_train shape:', X_train.shape)
 print('X_test shape:', X_test.shape)
 y_train = np.array(y_train)
 y_test = np.array(y_test)
-print('check :X[4][152] ',X_train[5][153])
+print('2.check :X[4][152] ',X_train[5][153])
 sequence = Input(shape=(156,), dtype='int32')  
 #embedded = Embedding(max_features, 128, input_length=156)(sequence)
 embedded = Embedding(4425, 128, input_length=156)(sequence)
 
-forwards = LSTM(64)(embedded)
-backwards = LSTM(64, go_backwards=True)(embedded)
+forwards = LSTM(128)(embedded)
+backwards = LSTM(128, go_backwards=True)(embedded)
 
 merged = merge([forwards, backwards], mode='concat', concat_axis=-1)
 after_dp = Dropout(0.5)(merged)
@@ -64,6 +64,11 @@ model.fit(X_train, y_train,
           batch_size=batch_size,
           nb_epoch=4,
           validation_data=[X_test, y_test])
+
+y_pred = model.predict(X_test)
+##changes made
+scio.savemat('pridict.mat', dict(output=y_pred))
+
 
 
 
