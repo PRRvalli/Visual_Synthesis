@@ -54,10 +54,10 @@ backwards = LSTM(128, go_backwards=True)(embedded)
 
 merged = merge([forwards, backwards], mode='sum', concat_axis=-1)
 after_dp = Dropout(0.2)(merged)
-output = Dense(14, activation='tanh')(after_dp)
+output = Dense(14, activation='sigmoid')(after_dp)
 
 model = Model(input=sequence, output=output)
-model.compile('adam', 'binary_crossentropy', metrics=['accuracy'])
+model.compile('adam', 'mean_squared_error', metrics=['accuracy'])
 
 print('Train...')
 model.fit(X_train, y_train,
@@ -67,7 +67,7 @@ model.fit(X_train, y_train,
 
 y_pred = model.predict(X_test)
 ##changes made
-scio.savemat('new_value.mat', dict(output=y_pred))
+scio.savemat('pridict1.mat', dict(output=y_pred))
 
 
 

@@ -19,10 +19,10 @@ batch_size = 32
 #(X_train, y_train), (X_test, y_test) = imdb.load_data(nb_words=max_features,test_split=0.2)
 
 
-X_train=scio.loadmat('1.mat')
-y_train=scio.loadmat('2.mat')
-X_test=scio.loadmat('3.mat');
-y_test=scio.loadmat('4.mat');
+X_train=scio.loadmat('40_train.mat')
+y_train=scio.loadmat('40_test.mat')
+X_test=scio.loadmat('20_in.mat');
+y_test=scio.loadmat('20_out.mat');
 
 X_train=X_train['Input_feature'];
 X_test=X_test['Input_feature'];
@@ -31,7 +31,7 @@ y_test=y_test['Output_feature'];
 
 print(len(X_train), 'train sequences')
 print(len(X_test), 'test sequences')
-print('1.check :X[4][152] ',X_train[5][153])
+print('1.check :X[4][20] ',X_train[3][19])
 print("Pad sequences (samples x time)")
 ## X_train = sequence.pad_sequences(X_train, maxlen=maxlen)
 ## X_test = sequence.pad_sequences(X_test, maxlen=maxlen)
@@ -44,20 +44,20 @@ print('X_train shape:', X_train.shape)
 print('X_test shape:', X_test.shape)
 y_train = np.array(y_train)
 y_test = np.array(y_test)
-print('2.check :X[4][152] ',X_train[5][153])
-sequence = Input(shape=(156,), dtype='int32')  
+print('2.check :X[4][20] ',X_train[3][19])
+sequence = Input(shape=(39,), dtype='int32')  
 #embedded = Embedding(max_features, 128, input_length=156)(sequence)
-embedded = Embedding(4425, 128, input_length=156)(sequence)
+embedded = Embedding(9591, 128, input_length=39)(sequence)
 
-forwards = LSTM(64)(embedded)
-backwards = LSTM(64, go_backwards=True)(embedded)
+forwards = LSTM(128)(embedded)
+backwards = LSTM(128, go_backwards=True)(embedded)
 
-merged = merge([forwards, backwards], mode='concat', concat_axis=-1)
-after_dp = Dropout(0.5)(merged)
-output = Dense(44, activation='sigmoid')(after_dp)
+merged = merge([forwards, backwards], mode='sum', concat_axis=-1)
+after_dp = Dropout(0.2)(merged)
+output = Dense(14, activation='sigmoid')(after_dp)
 
 model = Model(input=sequence, output=output)
-model.compile('adam', 'mean_squared_error', metrics=['accuracy'])
+model.compile('adam', 'binary_crossentropy', metrics=['accuracy'])
 
 print('Train...')
 model.fit(X_train, y_train,
