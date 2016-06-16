@@ -12,7 +12,7 @@ from keras.datasets import imdb
 
 ## max_features = 20000 # it should be 180 or the length of input sequence
 ## maxlen = 100  # cut texts after this number of words (among top max_features most common words)  our case 156 
-batch_size = 32
+batch_size = 128
 
 
 #print('Loading data...')
@@ -21,8 +21,8 @@ batch_size = 32
 
 X_train=scio.loadmat('40_train.mat')
 y_train=scio.loadmat('40_test.mat')
-X_test=scio.loadmat('20_in.mat');
-y_test=scio.loadmat('20_out.mat');
+X_test=scio.loadmat('50_in.mat');
+y_test=scio.loadmat('50_out.mat');
 
 X_train=X_train['Input_feature'];
 X_test=X_test['Input_feature'];
@@ -31,7 +31,7 @@ y_test=y_test['Output_feature'];
 
 print(len(X_train), 'train sequences')
 print(len(X_test), 'test sequences')
-print('1.check :X[4][20] ',X_train[3][19])
+print('1.check :X[4][129] ',X_train[3][128])
 print("Pad sequences (samples x time)")
 ## X_train = sequence.pad_sequences(X_train, maxlen=maxlen)
 ## X_test = sequence.pad_sequences(X_test, maxlen=maxlen)
@@ -44,30 +44,30 @@ print('X_train shape:', X_train.shape)
 print('X_test shape:', X_test.shape)
 y_train = np.array(y_train)
 y_test = np.array(y_test)
-print('2.check :X[4][20] ',X_train[3][19])
-sequence = Input(shape=(39,), dtype='int32')  
+print('2.check :X[4][129] ',X_train[3][128])
+sequence = Input(shape=(X_train.shape[1],), dtype='int32')  
 #embedded = Embedding(max_features, 128, input_length=156)(sequence)
-embedded = Embedding(9591, 128, input_length=39)(sequence)
+embedded = Embedding(X_train.shape[0], 128, input_length=X_train.shape[1])(sequence)
 
 forwards = LSTM(128)(embedded)
 backwards = LSTM(128, go_backwards=True)(embedded)
 
 merged = merge([forwards, backwards], mode='sum', concat_axis=-1)
 after_dp = Dropout(0.2)(merged)
-output = Dense(14, activation='tanh')(after_dp)
+output = Dense(y_train.shape[1], activation='tanh')(after_dp)
 
 model = Model(input=sequence, output=output)
-model.compile('adam', 'binary_crossentropy', metrics=['accuracy'])
+model.compile('adam', 'mse', metrics=['accuracy'])
 
 print('Train...')
 model.fit(X_train, y_train,
           batch_size=batch_size,
-          nb_epoch=4,
+          nb_epoch=100,
           validation_data=[X_test, y_test])
 
 y_pred = model.predict(X_test)
 ##changes made
-scio.savemat('new_value.mat', dict(output=y_pred))
+scio.savemat('normalised_position.mat', dict(pos=y_pred))
 
 
 
