@@ -8,13 +8,13 @@ tic
 
 subject = 'Abhishek';
 
-sentenceID = 10;
+sentenceID = 65;
 matPath = '../4.mat';
 audioPath = ['wav/' subject num2str(sentenceID) '.wav'];
 outputVideoPath = 'output\4.avi';
 datasetFolder = 'D:\IISc Summer\SII\Abhishek\SII_Inputs';
 
 getAudioFile(sentenceID,datasetFolder, audioPath);
-synthesizeVideo(matPath, audioPath, outputVideoPath);
+% synthesizeVideo(matPath, audioPath, outputVideoPath);
 
 toc
