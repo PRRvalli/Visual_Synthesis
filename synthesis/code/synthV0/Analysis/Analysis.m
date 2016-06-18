@@ -11,12 +11,15 @@ plot(predicted(:,X))
 hold on
 plot(Actual(:,X),'r')
 load lowpass_filter.mat
-spectrogram(Actual(:,22),100,80,1024,100);
-figure;spectrogram(predicted(:,22),100,98,128,100);
+% spectrogram(Actual(:,22),100,80,1024,100);
+% figure;spectrogram(predicted(:,22),100,98,128,100);
 
-for i=1:44
-    pos(:,i) = filter([lpf.Numerator],[1],predicted(:,i));
-    
-    
-end
-save([load_mat 'filtered'],'')
+% for i=1:44
+%     pos(:,i) = filter([lpf.Numerator],[1],predicted(:,i));
+%     
+%     
+% end
+%save([load_mat 'filtered'],'')
+
+
+
