@@ -17,14 +17,16 @@ realOut = Output_feature;
 [b,a] = butter(5,.15);
 filtOut = filtfilt(b,a,predOut);
 
-%% Plot the vectors for a point
-pointID = 21;
-figure(1);
-subplot(311); plot(realOut(:,pointID)); title('Expected');hold on;
-subplot(312); plot(predOut(:,pointID)); title('Actual'); hold on;
-subplot(313); plot(filtOut(:,pointID)); title('Filtered');
-
 %% Save the output
 pos = filtOut;
 save('filt_65_3p3m.mat','pos');
+
+%% Plot the vectors for a point
+for pointID = 1:44;
+    close;
+    subplot(311); plot(realOut(:,pointID)); title(['Expected ' num2str(pointID)]);hold on;
+    subplot(312); plot(predOut(:,pointID)); title('Actual'); hold on;
+    subplot(313); plot(filtOut(:,pointID)); title('Filtered'); hold on;
+    pause;
+end
 toc

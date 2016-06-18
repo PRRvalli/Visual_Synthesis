@@ -1,0 +1,21 @@
+function [ I ] = getFaceImageFromLocation( subject, sentenceID, frameID, folder)
+%% Description:
+% This function outputs the frame corresponding to a sentence and 
+% a frame number
+
+%% Get the file to fet frames from 
+sampleFactor = 4; % The upsampling factor for AAM samples wrt 25Hz
+frameIDActual = floor(frameID / sampleFactor);
+
+Q = floor(sentenceID/100);
+beginID = Q*100+1;
+if Q == 23
+    endID = 2368;
+else
+    endID = beginID + 99;
+end
+vidName = [folder '/' subject '/' Videos '/' Rec num2str(Q+1) '/'...
+    num2str(beginID) '_' num2str(endID) 'a.wav'];
+labName = [num2str(beginID) '_' num2str(endID) 'l.txt'];
+end
+
