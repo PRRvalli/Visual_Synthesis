@@ -19,10 +19,10 @@ batch_size = 128
 #(X_train, y_train), (X_test, y_test) = imdb.load_data(nb_words=max_features,test_split=0.2)
 
 
-X_train=scio.loadmat('40_train_3p3m.mat')
-y_train=scio.loadmat('40_test_3p3m.mat')
-X_test=scio.loadmat('65_train_3p3m.mat');
-y_test=scio.loadmat('65_test_3p3m.mat');
+X_train=scio.loadmat('420_train_3p3m.mat')
+y_train=scio.loadmat('420_test_3p3m.mat')
+X_test=scio.loadmat('40_train_3p3m.mat');
+y_test=scio.loadmat('40_test_3p3m.mat');
 
 X_train=X_train['Input_feature'];
 X_test=X_test['Input_feature'];
@@ -62,7 +62,7 @@ model.compile('adam', 'mse', metrics=['accuracy'])
 print('Train...')
 model.fit(X_train, y_train,
           batch_size=batch_size,
-          nb_epoch=50,
+          nb_epoch=100,
           validation_data=[X_test, y_test])
 
 score, acc = model.evaluate(X_test, y_test,batch_size=batch_size)
@@ -71,11 +71,11 @@ print('Test accuracy:', acc)
 
 y_pred = model.predict(X_test)
 ##changes made
-scio.savemat('Result/3p3m.mat', dict(pos=y_pred,loss=score,Accuracy=acc))
+scio.savemat('Result/420_3p3m.mat', dict(pos=y_pred,loss=score,Accuracy=acc))
 temp='/home/sgeadmin/Valli/mats_final/synthesis/code/Result/'
 #     enc= rbm_ptr.GetWeights()
 os.chdir(temp)
-model.save_weights('weight_3p3m',overwrite=True)
+model.save_weights('weight_420_3p3m',overwrite=True)
 
 
 

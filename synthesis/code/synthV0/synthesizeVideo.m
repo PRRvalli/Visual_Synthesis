@@ -11,8 +11,8 @@ function []=synthesizeVideo(fin, audioPath, fout)
 
 %% Read the input file and load background image
     load(fin);
-    AAMCoords = Output_feature;
-%     AAMCoords = pos;
+%     AAMCoords = Output_feature;
+    AAMCoords = pos;
     
 %% Lip configurations (get lip center and dimensions)
     lipCenter = [685,385];
@@ -84,13 +84,13 @@ function []=synthesizeVideo(fin, audioPath, fout)
 %% Add audio to the video
     tempFile = ['temp.avi'];
     
-%     dos(['mencoder -ovc copy -audiofile ' audioPath ' -oac copy ' fout ' -o ' 'temp.avi']);
-%     dos( ['del ' fout]);
-%     dos(['copy ' tempFile ' ' fout]);
-%     dos( ['del ' tempFile]);
-    system(['mencoder -ovc copy -audiofile ' audioPath ' -oac copy ' fout ' -o ' 'temp.avi']);
-    system( ['rm ' fout]);
-    system(['cp ' tempFile ' ' fout]);
-    system( ['rm ' tempFile]);
+    dos(['mencoder -ovc copy -audiofile ' audioPath ' -oac copy ' fout ' -o ' 'temp.avi']);
+    dos( ['del ' fout]);
+    dos(['copy ' tempFile ' ' fout]);
+    dos( ['del ' tempFile]);
+%     system(['mencoder -ovc copy -audiofile ' audioPath ' -oac copy ' fout ' -o ' 'temp.avi']);
+%     system( ['rm ' fout]);
+%     system(['cp ' tempFile ' ' fout]);
+%     system( ['rm ' tempFile]);
 
 end
