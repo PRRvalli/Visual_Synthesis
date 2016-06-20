@@ -22,6 +22,7 @@ mean_x=repmat(mean_x',[1,22]);
 mean_y=repmat(mean_y',[1,22]);
 new_aam(:,1:22)=AAM_all(:,1:22)-mean_x;
 new_aam(:,23:44)=AAM_all(:,23:44)-mean_y;
+
 %lip=[new_aam(:,1) new_aam(:,4) new_aam(:,5) new_aam(:,6) new_aam(:,9) new_aam(:,12) new_aam(:,1) new_aam(:,1+22) new_aam(:,4+22) new_aam(:,5+22) new_aam(:,6+22) new_aam(:,9+22) new_aam(:,12+22) new_aam(:,1+22)];
 
 Triphones=[];

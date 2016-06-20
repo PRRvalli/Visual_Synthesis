@@ -1,0 +1,30 @@
+tic
+X = input('sentence :');
+sentence=[num2str(X) '.mat'];
+
+
+A=load(['/home/prr/intern/Valli/mats_final/Abhishek/' sentence]);
+MFCC=A.finalstruct.MFCC;
+Phonemes=A.finalstruct.Phonemes;
+sen=[];
+frame=[];
+n=length(Phonemes);
+
+for i=1:n
+    P=Phonemes(i);
+    [sen(i,:) frame(i,:)]=frame_selection(P,MFCC(i,:));
+    
+
+
+end
+
+for i=2:n
+    P=Phonemes(i);
+    [sen(i,:) frame(i,:)]=AAM_selection(P,MFCC(i,:),);
+    
+
+
+end
+
+
+toc
