@@ -8,9 +8,10 @@ subject = 'Abhishek';
 
 sentenceID = 10;
 frameID = 80;
-for sentenceID = 1:4:100
-    sentenceID
-    I = getFaceImageFromLocation(subject, sentenceID, frameID, 'D:\IISc Summer\RECORDING\RECORDING');
-end
-% imshow(I);
+%for sentenceID = 1:4:100
+    %sentenceID
+    %I = getFaceImageFromLocation(subject, sentenceID, frameID, 'D:\IISc Summer\RECORDING\RECORDING');
+    I = getFaceImageFromLocation(subject, sentenceID, frameID, '/home/prr/intern');	
+%end
+imshow(I);
 toc

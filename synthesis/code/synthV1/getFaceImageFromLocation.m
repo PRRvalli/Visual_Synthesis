@@ -15,7 +15,7 @@ function [ I ] = getFaceImageFromLocation( subject, sentenceID, frameID, folder)
         endID = beginID + 99;
     end
     vidName = [folder '/' subject '/Videos/Rec' num2str(Q+1) '/'...
-        num2str(beginID) '_' num2str(endID) 'v.mp4'];
+        num2str(beginID) '_' num2str(endID) 'v.MP4'];
     labName = [folder '/' subject '/Videos/Rec' num2str(Q+1) '/'...
         num2str(beginID) '_' num2str(endID) 'l.txt'];
 

@@ -1,7 +1,7 @@
 function [sentence frame aam]=AAM_selection(Phoneme,MFCC,prev_aam)
 
 train=load(['/home/prr/intern/database/Phoneme' num2str(Phoneme) '.mat']);
-
+% use train data and test on train data  just change the load function
 
 if(Phoneme==1)
 Matrix_train=train.Phonemes1;
