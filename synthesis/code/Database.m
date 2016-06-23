@@ -86,7 +86,7 @@ Phonemes38=[];
 Phonemes39=[];
 
     
-for K = 1200:numfids
+for K = 1:200
 
     A=load(['/home/prr/intern/Valli/mats_final/Abhishek/' fnames(K).name]);
     if(length(A.finalstruct.MFCC)~=0)
@@ -95,7 +95,7 @@ for K = 1200:numfids
     AAM=A.finalstruct.AAM_all;
     n=length(Phonemes);
     sentence=numreturn(fnames(K).name);
-    K
+    
 if(length(MFCC)==n)&&(length(AAM==n))    
 %% each we will be we will be updating the data-base based on the Phoneme level
 for i=1:n

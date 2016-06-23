@@ -1,0 +1,25 @@
+no_aam=5;
+no_frames=length(mse);
+
+% mse is available 
+% minimum's position
+position_matrix=[];
+s=size(mse)
+C=[];
+error=[];
+C(1,:)=zeros(1,no_aam);
+
+for i=1:no_aam
+start(i)=1+5*(i-1);
+stop(i)=5*i;
+end
+
+%for i=1:no_frame
+     for j=1:s(2)
+         k=ceil(j/5);
+         error(i,j)=C(i,k)+mse(i,j)
+
+     end
+     
+      
+%end

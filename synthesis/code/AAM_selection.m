@@ -1,6 +1,6 @@
-function [sentence frame aam]=AAM_selection(Phoneme,MFCC,prev_aam)
+function [sentence frame aam]=AAM_selection(Phoneme,MFCC,prev_aam,train)
 
-train=load(['/home/prr/intern/database/Phoneme' num2str(Phoneme) '.mat']);
+%train=load(['/home/prr/intern/database/Phonemes_abhishek_train.mat']);
 % use train data and test on train data  just change the load function
 
 if(Phoneme==1)
