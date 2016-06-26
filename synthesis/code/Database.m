@@ -86,7 +86,7 @@ Phonemes38=[];
 Phonemes39=[];
 
     
-for K = 1:200
+for K = 1200:numfids
 
     A=load(['/home/prr/intern/Valli/mats_final/Abhishek/' fnames(K).name]);
     if(length(A.finalstruct.MFCC)~=0)
@@ -95,7 +95,7 @@ for K = 1:200
     AAM=A.finalstruct.AAM_all;
     n=length(Phonemes);
     sentence=numreturn(fnames(K).name);
-    
+    K
 if(length(MFCC)==n)&&(length(AAM==n))    
 %% each we will be we will be updating the data-base based on the Phoneme level
 for i=1:n
@@ -263,6 +263,6 @@ end
 end
 %% Saving it to the database
 
-save('/home/prr/intern/database/Phonemes_abhishek_test.mat','Phonemes1','Phonemes2','Phonemes3','Phonemes4','Phonemes5','Phonemes6','Phonemes7','Phonemes8','Phonemes9','Phonemes10','Phonemes11','Phonemes12','Phonemes13','Phonemes14','Phonemes15','Phonemes16','Phonemes17','Phonemes18','Phonemes19','Phonemes20','Phonemes21','Phonemes22','Phonemes23','Phonemes24','Phonemes25','Phonemes26','Phonemes27','Phonemes28','Phonemes29','Phonemes30','Phonemes31','Phonemes32','Phonemes33','Phonemes34','Phonemes35','Phonemes36','Phonemes37','Phonemes38','Phonemes39');
+save('/home/prr/intern/database/Phonemes_abhishek_test2.mat','Phonemes1','Phonemes2','Phonemes3','Phonemes4','Phonemes5','Phonemes6','Phonemes7','Phonemes8','Phonemes9','Phonemes10','Phonemes11','Phonemes12','Phonemes13','Phonemes14','Phonemes15','Phonemes16','Phonemes17','Phonemes18','Phonemes19','Phonemes20','Phonemes21','Phonemes22','Phonemes23','Phonemes24','Phonemes25','Phonemes26','Phonemes27','Phonemes28','Phonemes29','Phonemes30','Phonemes31','Phonemes32','Phonemes33','Phonemes34','Phonemes35','Phonemes36','Phonemes37','Phonemes38','Phonemes39');
 
 

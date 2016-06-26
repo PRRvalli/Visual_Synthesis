@@ -30,11 +30,12 @@ function [ I ] = getFaceImageFromLocation( subject, sentenceID, frameID, folder)
             continue
         end
         Obj = VideoReader(vidName);
+        % time - 2 sec 
         nFrames = Obj.NumberOfFrames;
         Fs = Obj.FrameRate;
-
-        start_frame = round(meas(q,1)*Fs);
         
+        start_frame = round(meas(q,1)*Fs);
+        stop_frame=round(meas(q,2)*Fs);
         I = imrotate(read(Obj,start_frame+frameIDActual-1), 90);
         break;
     end

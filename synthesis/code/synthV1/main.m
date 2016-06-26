@@ -3,15 +3,16 @@
 
 %% Code
 tic
-clc;clear all; close all;
+%clc;%clear all; close all;
 subject = 'Abhishek';
-
-sentenceID = 10;
-frameID = 80;
+for i=1:227
+sentenceID = out_sen(i);
+frameID = out_fram(i);
 %for sentenceID = 1:4:100
     %sentenceID
     %I = getFaceImageFromLocation(subject, sentenceID, frameID, 'D:\IISc Summer\RECORDING\RECORDING');
-    I = getFaceImageFromLocation(subject, sentenceID, frameID, '/home/prr/intern');	
+    I(:,:,:,i) = getFaceImageFromLocation(subject, sentenceID, frameID, '/home/prr/intern');	
 %end
-imshow(I);
+%imshow(I);
+end
 toc

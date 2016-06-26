@@ -1,4 +1,4 @@
-function [sentence frame aam array]=AAM_selectionV2(Phoneme,MFCC,train)
+function [aam array]=AAM_selectionV2(Phoneme,MFCC,train,images)
 
 %train=load(['/home/prr/intern/database/Phonemes_abhishek_train.mat']);
 % use train data and test on train data  just change the load function
@@ -129,10 +129,10 @@ mse=sum((error.*error)');
 number=[1:n];
 array=[mse;number]';
 % change the number as you need
-array=sort_array(array,5);
-for i=1:5
-   sentence(i)=Matrix_train(array(i),84);
-   frame(i)=Matrix_train(array(i),85);
+array=sort_array(array,images);
+for i=1:images
+   % sentence(i)=Matrix_train(array(i),84);
+   % frame(i)=Matrix_train(array(i),85);
    aam(i,:)=Matrix_train(array(i),40:83);
     
 end

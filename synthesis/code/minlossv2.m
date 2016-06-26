@@ -1,5 +1,5 @@
-no_aam=5;
-no_frames=length(mse);
+no_aam=images;
+no_frames=length(mse(:,1));
 
 % mse is available 
 % minimum's position
@@ -13,10 +13,10 @@ err=[];
 C(1,:)=zeros(1,no_aam);
 
 for i=1:no_aam
-start(i)=1+5*(i-1);
-stop(i)=5*i;
+start(i)=1+no_aam*(i-1);
+stop(i)=no_aam*i;
 end
-
+i=1;
 for i=1:no_frames
 
      for j=1:no_aam
@@ -175,7 +175,8 @@ for i=1:no_frames+1
     place=array(i,position(i));
     % output(i,:)=Matrix_train(place,:);
     output(i,:)=Matrix_train(place,40:83);
-    
+    out_sen(i)=Matrix_train(place,84);
+    out_fram(i)=Matrix_train(place,85);
     
     
     
@@ -192,9 +193,17 @@ truth=mean_centre(truth);
 for i=1:no_frames+1
    plot(new_output(i,x),new_output(i,y),'b')
    hold on
-   plot(truth(i,x),truth(i,y),'c')
-   pause(0.1)
+   plot(truth(i,x),truth(i,y),'r')
+   axis([-300 +300 -300 300])
+   pause(0.05)
    hold off
     
 end
 
+for i=1:no_frames+1
+    plot(new_output(i,:),'r')
+    hold on
+    plot(truth(i,:),'b')
+    pause(0.01)
+    hold off
+end
