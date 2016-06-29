@@ -8,22 +8,22 @@ tic
 
 subject = 'Abhishek';
 
-sentenceID = 65;
-
-matPath = '../Result/3p3m.mat';
+sentenceID = 670;
+audio_extraction(sentenceID);
+%matPath = 'out_aam.mat';
 % matPath = '../65_test_3p.mat';
 % matPath = 'Analysis/filt_65_3p3m.mat';
-
-audioPath = ['wav/' subject num2str(sentenceID) '.wav'];
+input=new_output;
+audioPath = ['wav/' num2str(sentenceID) '.wav'];
 
 % outputVideoPath = 'output\65_filt_3p3m.avi';
 % outputVideoPath = 'output/65_actual.avi';
 % outputVideoPath = 'output\65_actual.avi';
-outputVideoPath = 'output\65_pred.avi';
+outputVideoPath = ['output/' num2str(sentenceID) '_pred.avi'];
 
-datasetFolder = 'D:\IISc Summer\SII\Abhishek\SII_Inputs';
+%datasetFolder = 'D:\IISc Summer\SII\Abhishek\SII_Inputs';
 
 % getAudioFile(sentenceID,datasetFolder, audioPath);
-synthesizeVideo(matPath, audioPath, outputVideoPath);
+synthesizeVideo(input, audioPath, outputVideoPath);
 
 toc
