@@ -1,4 +1,4 @@
-function [lipCenterCoords] = getLipCenterFromFace(I0, configFilePath,prev)
+function [lipCenterCoords] = getLipCenterFromFace(I0, configFilePath)
 %% Code Description
 % This function gives the coordinates (row, column) of the lip center given an image I0.
 % It requires certain params to be set via a configuration file, whose path
@@ -40,7 +40,7 @@ pass = 1;
     end
     cordinates=[1 1 1 1];
    for i=1:size(bbox,1)
-        if(((bbox(i,2)+bbox(i,4))<1280) && ((bbox(i,1)+bbox(i,3))<720) && (bbox(i,3)>100 &&(bbox(i,4)>100)))
+        if(((bbox(i,2)+bbox(i,4))<1280) && ((bbox(i,1)+bbox(i,3))<720) && (bbox(i,3)>100 &&(bbox(i,4)>100)) && (bbox(i,1)<200) && (bbox(i,2)<500))
             cordinates=bbox(i,:)
             break
         end
@@ -165,8 +165,7 @@ pass = 1;
     if cropLip == 1 && Ysym > 0
         lipCropped = im2double(face(BBr+Ysym-HalfLipHeight:BBr+Ysym+HalfLipHeight,BBc+Xsym-HalfLipWidth:BBc+Xsym+HalfLipWidth,1));
     end
-    else
-      lipCenterCoords=prev;  
+    
     end
 toc    
 end

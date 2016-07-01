@@ -8,11 +8,11 @@ function [lipCenterCoords,bbox]=getface_cord(I0,configFilePath)
     end
     cordinates=[1 1 1 1];
     for i=1:size(bbox,1)
-        if(((bbox(i,2)+bbox(i,4))<1280) && ((bbox(i,1)+bbox(i,3))<720) && (bbox(i,3)>100 &&(bbox(i,4)>100)))
+        if(((bbox(i,2)+bbox(i,4))<1280) && ((bbox(i,1)+bbox(i,3))<720) && (bbox(i,3)>100 &&(bbox(i,4)>100)) && (bbox(i,1)<200) && (bbox(i,2)<500))
             cordinates=bbox(i,:);
             break
         end
-    end
+   end
     bbox=[];
     bbox=cordinates;
     

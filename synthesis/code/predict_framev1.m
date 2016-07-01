@@ -221,5 +221,5 @@ new_output=mean_centre(output);
 truth=mean_centre(truth);
 
 
-
+save('/home/prr/intern/Valli/mats_final/synthesis/code/synthV1/input_file.mat','out_fram','out_sen','new_output');
 toc
