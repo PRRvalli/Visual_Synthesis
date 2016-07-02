@@ -5,10 +5,10 @@
 folder='/media/prr/PRR/PRAVCorpus/images/';
 out_folder='output/';
 % sentence and their frame number
- load input_file.mat
+ load input_file2.mat
 % give the actual sentence number 
-Actual_sentence =665;
-fout = [out_folder num2str(Actual_sentence) '-lip.avi'];
+Actual_sentence =680;
+fout = [out_folder num2str(Actual_sentence) '_pi2.avi'];
 Obj=VideoWriter(fout);
 Obj.FrameRate=100;
 open(Obj);
@@ -29,8 +29,9 @@ for i = 1:n
     actual_frame=floor(out_fram(i)/4)+1;
     I=imread([folder num2str(out_sen(i)) '_' num2str(actual_frame) '.jpg']);
     lip=optimal_centre(I,'Abhishek');
-    Background(lip_back(1)-65:lip_back(1)+65,lip_back(2)-105:lip_back(2)+90,:)=I(lip(1)-65:lip(1)+65,lip(2)-105:lip(2)+90,:);
-    writeVideo(Obj,Background);  
+    %Background(lip_back(1)-70:lip_back(1)+70,lip_back(2)-105:lip_back(2)+95,:)=I(lip(1)-70:lip(1)+70,lip(2)-105:lip(2)+90,:);
+    I=poisson_imaging(lip_back,lip,Background,I);
+    writeVideo(Obj,I);  
 end
 
 close(Obj);

@@ -7,9 +7,9 @@ I=rgb2hsv(I);
 % s-start e-end
 p_lip=lip;
 c_lip=[0 0];
-for rec=1:5
+for rec=1:4
     if(sum(p_lip-c_lip)~=0)
-    disp(['iteration-' num2str(rec)]);    
+    %disp(['iteration-' num2str(rec)]);    
     max_limit=bbox(2)+bbox(4);
     s_col=bbox(1);
     e_col=bbox(1)+bbox(3);
@@ -39,11 +39,11 @@ for rec=1:5
     end
 end
   %figure;
-  imshow(c_image)
-  hold on
-  rectangle('Position',[lip(2)-90,lip(1)-70,180,140])
-  hold on
-  plot(lip(2),lip(1),'*', 'markersize', 30)
+%   imshow(c_image)
+%   hold on
+%   rectangle('Position',[lip(2)-90,lip(1)-70,180,140])
+%   hold on
+%   plot(lip(2),lip(1),'*', 'markersize', 30)
   %pause(1);
 % I(lip(i,1)-80:lip(i,1)+80,bbox(i,1):bbox(i,1)+bbox(i,3),:)
 % I(bbox(i,2):bbox(i,2)+bbox(i,4),bbox(i,1):bbox(i,1)+bbox(i,3),:)
