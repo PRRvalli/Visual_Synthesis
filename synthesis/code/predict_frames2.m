@@ -236,6 +236,6 @@ for i=1:no_frames+1
     pause(0.05)
     hold off
 end
-
-save('/home/prr/intern/Valli/mats_final/synthesis/code/synthV1/input_file3.mat','out_fram','out_sen','new_output','out_type');
+%save('/home/prr/intern/Valli/mats_final/synthesis/code/aam_out.mat')
+save('/home/prr/intern/Valli/mats_final/synthesis/code/synthV2/input_file4.mat','out_fram','out_sen','new_output','out_type');
 toc
