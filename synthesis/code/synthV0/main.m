@@ -8,12 +8,12 @@ tic
 
 subject = 'Abhishek';
 
-sentenceID = 670;
+sentenceID = 1609;
 audio_extraction(sentenceID);
 %matPath = 'out_aam.mat';
 % matPath = '../65_test_3p.mat';
 % matPath = 'Analysis/filt_65_3p3m.mat';
-input=new_output;
+input=dataOut;
 audioPath = ['wav/' num2str(sentenceID) '.wav'];
 
 % outputVideoPath = 'output\65_filt_3p3m.avi';

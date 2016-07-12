@@ -13,4 +13,4 @@ B=zeros(1,2368);
 B(y)=1;
 result=B-A;
 pos=find(result==1);
-save('/home/prr/intern/Valli/mats_final/synthesis/code/synthV1/test_sen.mat','pos');
+%save('/home/prr/intern/Valli/mats_final/synthesis/code/synthV1/test_sen.mat','pos');
