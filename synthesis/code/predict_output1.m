@@ -1,15 +1,21 @@
-function new_output=predict_output(X,freq,subject,train)
+function new_output=predict_output1(X,subject,train)
 sentence=[num2str(X) '.mat'];
 images=20;
-train=load(['/home/prr/intern/database/Phonemes_abhishek_train2.mat']);
+%train=load(['/home/prr/intern/database/Phonemes_abhishek_train2.mat']);
 %train=load(['/home/prr/intern/database/Phonemes' subject '_good_sen.mat']);
 A=load(['/home/prr/intern/Valli/mats_final/' subject '/' sentence]);
 MFCC=A.finalstruct.MFCC;
 Phonemes=A.finalstruct.Phonemes;
+
 sen=[];
 frame=[];
+if(length(Phonemes)==length(MFCC))
 n=length(Phonemes);
-
+elseif(length(MFCC)>0)
+n=length(MFCC);
+end
+    
+    
     P=Phonemes(1);
     [aam array(1,:)]=AAM_selectionV2(P,MFCC(1,:),train,images);
     
@@ -205,7 +211,7 @@ for i=1:no_frames+1
     output(i,:)=Matrix_train(place,40:83);
     out_sen(i)=Matrix_train(place,84);
     out_fram(i)=Matrix_train(place,85);
-    %out_type(i)=Matrix_train(place,86);
+    out_type(i)=Matrix_train(place,86);
     
     
     
@@ -214,10 +220,10 @@ end
 
 new_output=mean_centre(output);
 
-[b,a] = butter(6,(freq/50));
-dataOut=[];
-for i=1:44
-dataOut(:,i) = filtfilt(b,a,new_output(:,i));
-end
-new_output=dataOut;
+% [b,a] = butter(6,(freq/50));
+% dataOut=[];
+% for i=1:44
+% dataOut(:,i) = filtfilt(b,a,new_output(:,i));
+% end
+% new_output=dataOut;
 end

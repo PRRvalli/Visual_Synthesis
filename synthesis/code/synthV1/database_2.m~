@@ -103,7 +103,7 @@ for K=1:length(files)
     disp([num2str(K) '...'])
     if(length(MFCC)==n)&&(length(AAM==n))
     count=count+1;
-    %c=c+1;  
+    c=c+1;  
 for i=1:n
 
 
@@ -276,7 +276,7 @@ save(['/home/prr/intern/database/' subject '_final.mat'],'Phonemes1','Phonemes2'
 %pos=available_sen(K+1:end,:);
 
 %remaining sentence
-c=0;test_sentence=[];
+
 for rem=K:length(files)
     
     A=load(['/home/prr/intern/Valli/mats_final/' subject '/' files(rem).name]);
@@ -285,13 +285,11 @@ for rem=K:length(files)
     Phonemes=A.finalstruct.Phonemes;
     AAM=A.finalstruct.AAM_all;
     n=length(Phonemes);
-    sentence=numreturn(files(rem).name);
+    sentence=numreturn(files(K).name);
     %type=available_sen(K,2);
     type=1;
-    disp([num2str(rem) '...'])
+    disp([num2str(K) '...'])
     if(length(MFCC)==n)&&(length(AAM==n))
-        c=c+1; 
-        test_sentence(c)=sentence;
     end
     end
     
