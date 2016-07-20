@@ -1,5 +1,5 @@
 clear all
-subject='Niranjana';
+subject='Abhishek';
 
 files=dir(['/home/prr/intern/Valli/mats_final/' subject '/*.mat' ]);
 

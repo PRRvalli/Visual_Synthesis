@@ -1,22 +1,29 @@
 tic
 clear
-X = input('sentence :');
+subject='Abhishek';
+train=load(['/home/prr/intern/database/' subject '_final.mat']);
+load('synthV1/Abhi_test_sentence_final.mat','test_sentence');
+%load('/home/prr/intern/Predicted/Niranjana/test_sentence.mat','test_sentence');
+for t=1:length(test_sentence)
+%X = input('sentence :');
+disp(['sentence: ' num2str(t)]);
+X=test_sentence(t);
 sentence=[num2str(X) '.mat'];
 images=20;
-train=load(['/home/prr/intern/database/Phonemes_good_sen.mat']);
-A=load(['/home/prr/intern/Valli/mats_final/Abhishek/' sentence]);
+A=load(['/home/prr/intern/Valli/mats_final/' subject '/' sentence]);
 MFCC=A.finalstruct.MFCC;
 Phonemes=A.finalstruct.Phonemes;
 sen=[];
 frame=[];
+mse=[];
 n=length(Phonemes);
-
+array=[];
     P=Phonemes(1);
     [aam array(1,:)]=AAM_selectionV2(P,MFCC(1,:),train,images);
     
     prev=mean_centre(aam);
 for i=2:n
-    i
+    %i
     P=Phonemes(i);
     [aam array(i,:)]=AAM_selectionV2(P,MFCC(i,:),train,images);
     current=mean_centre(aam);
@@ -65,7 +72,7 @@ for i=1:no_frames
      end
       
 end
-
+position=[];
 
 [low_cost,index]=min(C);
 position=zeros(1,no_frames+1);
@@ -204,9 +211,9 @@ for i=1:no_frames+1
     place=array(i,position(i));
     % output(i,:)=Matrix_train(place,:);
     output(i,:)=Matrix_train(place,40:83);
-    out_sen(i)=Matrix_train(place,84);
-    out_fram(i)=Matrix_train(place,85);
-    out_type(i)=Matrix_train(place,86);
+    %out_sen(i)=Matrix_train(place,84);
+    %out_fram(i)=Matrix_train(place,85);
+    %out_type(i)=Matrix_train(place,86);
     
     
     
@@ -215,27 +222,43 @@ end
 
 % mean centre the output 
 truth=A.finalstruct.AAM_all;
-x=[1:14 1 15:22 15];
-y=[23:36 23 15+22:44 15+22];
+% x=[1:14 1 15:22 15];
+% y=[23:36 23 15+22:44 15+22];
 new_output=mean_centre(output);
 truth=mean_centre(truth);
-for i=1:no_frames+1
-   plot(new_output(i,x),new_output(i,y),'b')
-   hold on
-   plot(truth(i,x),truth(i,y),'r')
-   axis([-300 +300 -300 300])
-   pause(0.05)
-   hold off
-    
+% for i=1:no_frames+1
+%    plot(new_output(i,x),new_output(i,y),'b')
+%    hold on
+%    plot(truth(i,x),truth(i,y),'r')
+%    axis([-300 +300 -300 300])
+%    pause(0.05)
+%    hold off
+%     
+% end
+% 
+% for i=1:no_frames+1
+%     plot(new_output(i,:),'r')
+%     hold on
+%     plot(truth(i,:),'b')
+%     pause(0.05)
+%     hold off
+% end
+% %save('/home/prr/intern/Valli/mats_final/synthesis/code/aam_out.mat')
+% save('/home/prr/intern/Valli/mats_final/synthesis/code/synthV2/input_file4.mat','out_fram','out_sen','new_output','out_type');
+toc
+save(['/home/prr/intern/Predicted/Abhi/' sentence],'new_output');
+
+dataOut=[];
+F=1;
+for freq=1:15
+for F=1:44
+dataOut(:,F)=smoother(new_output(:,F),freq);
+c=corrcoef(dataOut(:,F),truth(:,F));
+coef(freq,F)=c(2);
+end
 end
 
-for i=1:no_frames+1
-    plot(new_output(i,:),'r')
-    hold on
-    plot(truth(i,:),'b')
-    pause(0.05)
-    hold off
+[M(t,:),Po(t,:)]=max(coef);
+stem(M(t,:));
+%pause(0.5)
 end
-%save('/home/prr/intern/Valli/mats_final/synthesis/code/aam_out.mat')
-save('/home/prr/intern/Valli/mats_final/synthesis/code/synthV2/input_file4.mat','out_fram','out_sen','new_output','out_type');
-toc
